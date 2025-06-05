@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const Register = () => {
+interface RegisterProps {
+  onRegisterSuccess?: () => void;
+}
+
+const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
   const [form, setForm] = useState({
     full_name: "",
     email: "",
@@ -47,6 +51,9 @@ const Register = () => {
           password: "",
           confirmed_password: "",
         });
+        if (onRegisterSuccess) {
+          onRegisterSuccess();
+        }
       }
     } catch {
       setError("Network error. Please try again.");
